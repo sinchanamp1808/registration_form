@@ -1,150 +1,387 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Registration Form</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #6a5acd, #00bfff);
-            margin: 0;
-            height: 100vh;
-
-            /* Center the form */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .container {
-            background: white;
-            width: 400px;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-
-        h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 25px;
-        }
-
-        label {
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            font-size: 14px;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #6a5acd;
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #5548c8;
-        }
-
-        #success {
-            display: none;
-            text-align: center;
-            font-size: 20px;
-            color: white;
-            font-weight: bold;
-        }
-
-        #detailsBox {
-            margin-top: 15px;
-            background: rgba(255,255,255,0.25);
-            padding: 15px;
-            border-radius: 10px;
-            color: #000;
-            font-size: 18px;
-        }
-    </style>
-</head>
-
-<body>
-
-<div class="container" id="formDiv">
-    <h2>Registration Form</h2>
-
-    <form id="regForm" onsubmit="showSuccess(event)">
-
-        <label>Name</label>
-        <input type="text" id="name" required>
-
-        <label>Email ID</label>
-        <input type="email" id="email" required>
-
-        <label>Phone Number</label>
-        <input type="text" id="phone" required>
-
-        <label>Address</label>
-        <input type="text" id="address" required>
-
-        <label>Age</label>
-        <input type="number" id="age" required>
-
-        <label>Gender</label>
-        <select id="gender" required>
-            <option value="">Select</option>
-            <option>Male</option>
-            <option>Female</option>
-            <option>Other</option>
-        </select>
-
-        <button type="submit">Submit</button>
-
-    </form>
-</div>
-
-<div id="success">
-    🎉 Registration Successful! 🎉
-    <div id="detailsBox"></div>
-</div>
-
-<script>
-    function showSuccess(event) {
-        event.preventDefault(); // prevent page reload
-
-        // Fetch entered values
-        let name = document.getElementById("name").value;
-        let email = document.getElementById("email").value;
-        let phone = document.getElementById("phone").value;
-        let address = document.getElementById("address").value;
-        let age = document.getElementById("age").value;
-        let gender = document.getElementById("gender").value;
-
-        // Display success page
-        document.getElementById("formDiv").style.display = "none";
-        document.getElementById("success").style.display = "block";
-
-        // Show details
-        document.getElementById("detailsBox").innerHTML =
-            "<p><b>Name:</b> " + name + "</p>" +
-            "<p><b>Email:</b> " + email + "</p>" +
-            "<p><b>Phone:</b> " + phone + "</p>" +
-            "<p><b>Address:</b> " + address + "</p>" +
-            "<p><b>Age:</b> " + age + "</p>" +
-            "<p><b>Gender:</b> " + gender + "</p>";
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Registration Form</title>
+  <style>
+    :root{
+      --bg1: #6a5acd;
+      --bg2: #00bfff;
+      --card: #ffffff;
+      --accent: #6a5acd;
+      --accent-dark: #5548c8;
+      --success-bg: #2ecc71;
     }
-</script>
 
+    /* Page layout */
+    html,body{
+      height:100%;
+      margin:0;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      box-sizing:border-box;
+    }
+
+    /* Card */
+    .card{
+      width: 100%;
+      max-width: 460px;
+      background: var(--card);
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+    }
+
+    h1{
+      margin: 0 0 14px 0;
+      font-size: 22px;
+      color: #222;
+      text-align:center;
+    }
+
+    form {
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    label {
+      font-size: 14px;
+      color: #333;
+      margin-top:6px;
+      margin-bottom:4px;
+      font-weight:600;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    select,
+    textarea {
+      width:100%;
+      padding:10px 12px;
+      border-radius:8px;
+      border:1px solid #ccc;
+      font-size:14px;
+      box-sizing:border-box;
+    }
+
+    textarea { resize: vertical; min-height:60px; }
+
+    .row {
+      display:flex;
+      gap:10px;
+    }
+
+    .row > * { flex:1; }
+
+    .actions {
+      display:flex;
+      gap:10px;
+      margin-top:6px;
+    }
+
+    button {
+      flex:1;
+      padding:11px;
+      border-radius:8px;
+      border: none;
+      cursor:pointer;
+      font-weight:600;
+      font-size:15px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(180deg, var(--accent), var(--accent-dark));
+      color:white;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border:1px solid #ddd;
+      color:#333;
+    }
+
+    .btn-danger {
+      background: #ff6b6b;
+      color:white;
+    }
+
+    .error {
+      color:#d9534f;
+      font-size:13px;
+      margin-top:4px;
+    }
+
+    /* Success view */
+    #successView{
+      display:none;
+      text-align:center;
+      padding:12px;
+      border-radius:10px;
+    }
+
+    .success-badge{
+      display:inline-block;
+      background: var(--success-bg);
+      color:white;
+      padding:8px 12px;
+      border-radius: 999px;
+      font-weight:700;
+      margin-bottom:12px;
+      box-shadow: 0 6px 18px rgba(46,204,113,0.25);
+    }
+
+    .details {
+      text-align:left;
+      margin-top:12px;
+      background: #f7f9fc;
+      padding:12px;
+      border-radius:8px;
+      border:1px solid #eef2f7;
+      font-size:15px;
+      color:#111;
+    }
+
+    .details p { margin:6px 0; line-height:1.3; }
+
+    /* small screens */
+    @media (max-width:420px){
+      .card { padding:16px; }
+      h1 { font-size:18px; }
+      button { font-size:14px; padding:10px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card" id="card">
+    <h1>Registration Form</h1>
+
+    <!-- Form -->
+    <div id="formView">
+      <form id="regForm" novalidate>
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" placeholder="Your full name" required />
+        <div class="error" id="errName" style="display:none"></div>
+
+        <label for="email">Email ID</label>
+        <input id="email" name="email" type="email" placeholder="you@example.com" required />
+        <div class="error" id="errEmail" style="display:none"></div>
+
+        <label for="phone">Phone Number</label>
+        <input id="phone" name="phone" type="text" inputmode="numeric" placeholder="10 digits" required />
+        <div class="error" id="errPhone" style="display:none"></div>
+
+        <label for="address">Address</label>
+        <textarea id="address" name="address" placeholder="Street, City, State..." required></textarea>
+        <div class="error" id="errAddress" style="display:none"></div>
+
+        <div class="row">
+          <div>
+            <label for="age">Age</label>
+            <input id="age" name="age" type="number" min="1" placeholder="e.g. 25" required />
+            <div class="error" id="errAge" style="display:none"></div>
+          </div>
+
+          <div>
+            <label for="gender">Gender</label>
+            <select id="gender" name="gender" required>
+              <option value="">Select</option>
+              <option>Male</option>
+              <option>Female</option>
+              <option>Other</option>
+              <option>Prefer not to say</option>
+            </select>
+            <div class="error" id="errGender" style="display:none"></div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn-primary">Submit</button>
+          <button type="button" id="clearBtn" class="btn-ghost">Clear All</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Success -->
+    <div id="successView" aria-live="polite">
+      <div class="success-badge">Registration Successful ✓</div>
+      <div id="successMsg">Thank you! Here are your details:</div>
+      <div class="details" id="detailsBox"></div>
+
+      <div style="display:flex; gap:10px; margin-top:12px;">
+        <button id="editBtn" class="btn-ghost" style="flex:1">Edit</button>
+        <button id="newBtn" class="btn-primary" style="flex:1">New Registration</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Helper: show/hide error
+    function showError(id, msg){
+      const el = document.getElementById(id);
+      if(msg){
+        el.textContent = msg;
+        el.style.display = "block";
+      } else {
+        el.style.display = "none";
+        el.textContent = "";
+      }
+    }
+
+    // Form and elements
+    const form = document.getElementById("regForm");
+    const formView = document.getElementById("formView");
+    const successView = document.getElementById("successView");
+    const detailsBox = document.getElementById("detailsBox");
+
+    // Buttons
+    const clearBtn = document.getElementById("clearBtn");
+    const editBtn = document.getElementById("editBtn");
+    const newBtn = document.getElementById("newBtn");
+
+    // Validation function
+    function validateInputs(data) {
+      let ok = true;
+
+      // Name
+      if(!data.name.trim()){
+        showError("errName", "Please enter your name.");
+        ok = false;
+      } else showError("errName", "");
+
+      // Email (basic)
+      if(!data.email.trim()){
+        showError("errEmail", "Please enter your email.");
+        ok = false;
+      } else {
+        // simple email regex
+        const eRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if(!eRe.test(data.email.trim())){
+          showError("errEmail", "Please enter a valid email address.");
+          ok = false;
+        } else showError("errEmail", "");
+      }
+
+      // Phone: exactly 10 digits
+      const digits = (data.phone.match(/\d/g) || []).join("");
+      if(digits.length !== 10){
+        showError("errPhone", "Phone must contain 10 digits.");
+        ok = false;
+      } else showError("errPhone", "");
+
+      // Address
+      if(!data.address.trim()){
+        showError("errAddress", "Please enter your address.");
+        ok = false;
+      } else showError("errAddress", "");
+
+      // Age
+      const ageNum = Number(data.age);
+      if(!data.age || isNaN(ageNum) || ageNum < 1){
+        showError("errAge", "Please enter a valid age (>=1).");
+        ok = false;
+      } else showError("errAge", "");
+
+      // Gender
+      if(!data.gender){
+        showError("errGender", "Please select gender.");
+        ok = false;
+      } else showError("errGender", "");
+
+      return ok;
+    }
+
+    // Fill details into success view
+    function showDetails(data){
+      detailsBox.innerHTML = `
+        <p><strong>Name:</strong> ${escapeHtml(data.name)}</p>
+        <p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
+        <p><strong>Phone:</strong> ${escapeHtml(data.phone)}</p>
+        <p><strong>Address:</strong> ${escapeHtml(data.address)}</p>
+        <p><strong>Age:</strong> ${escapeHtml(data.age)}</p>
+        <p><strong>Gender:</strong> ${escapeHtml(data.gender)}</p>
+      `;
+    }
+
+    // escape HTML to avoid injection when showing user data
+    function escapeHtml(s){
+      return (s + "").replace(/[&<>"']/g, function(m){
+        return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m];
+      });
+    }
+
+    // Get form data as object
+    function getFormData(){
+      return {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        address: document.getElementById("address").value,
+        age: document.getElementById("age").value,
+        gender: document.getElementById("gender").value
+      };
+    }
+
+    // Populate form fields (used for Edit)
+    function populateForm(data){
+      document.getElementById("name").value = data.name || "";
+      document.getElementById("email").value = data.email || "";
+      document.getElementById("phone").value = data.phone || "";
+      document.getElementById("address").value = data.address || "";
+      document.getElementById("age").value = data.age || "";
+      document.getElementById("gender").value = data.gender || "";
+    }
+
+    // Submit handler
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+      const data = getFormData();
+      if(!validateInputs(data)) return;
+
+      // Show success and details
+      formView.style.display = "none";
+      successView.style.display = "block";
+      showDetails(data);
+    });
+
+    // Clear all fields
+    clearBtn.addEventListener("click", function(){
+      form.reset();
+      // hide any error messages
+      ["errName","errEmail","errPhone","errAddress","errAge","errGender"].forEach(id => {
+        showError(id, "");
+      });
+    });
+
+    // Edit: go back to form with previous details retained
+    editBtn.addEventListener("click", function(){
+      successView.style.display = "none";
+      formView.style.display = "block";
+    });
+
+    // New registration: clear and go to form
+    newBtn.addEventListener("click", function(){
+      form.reset();
+      ["errName","errEmail","errPhone","errAddress","errAge","errGender"].forEach(id => {
+        showError(id, "");
+      });
+      successView.style.display = "none";
+      formView.style.display = "block";
+    });
+
+    // Optional: prevent non-digit characters in phone input except plus and spaces
+    const phoneInput = document.getElementById("phone");
+    phoneInput.addEventListener("input", function(){
+      // allow digits, space, +, -, parentheses — but keep them; validation uses digits only
+      // we won't strip automatically, but you can uncomment next line to strip non-digits:
+      // this.value = this.value.replace(/[^\d\s()+-]/g, "");
+    });
+  </script>
 </body>
 </html>
