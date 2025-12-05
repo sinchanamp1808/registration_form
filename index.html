@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px;
+        }
+        #success {
+            display: none;
+            font-size: 22px;
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Registration Form</h2>
+
+<div id="formDiv">
+    <form id="regForm" onsubmit="showSuccess(event)">
+        <label>Name:</label>
+        <input type="text" required><br><br>
+
+        <label>Phone No:</label>
+        <input type="text" required><br><br>
+
+        <label>Address:</label>
+        <input type="text" required><br><br>
+
+        <label>Age:</label>
+        <input type="number" required><br><br>
+
+        <label>Gender:</label>
+        <select required>
+            <option value="">Select</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<div id="success">
+    Registration Successful!
+</div>
+
+<script>
+    function showSuccess(event) {
+        event.preventDefault(); // stops page reload
+        document.getElementById("formDiv").style.display = "none";
+        document.getElementById("success").style.display = "block";
+    }
+</script>
+
+</body>
+</html>
