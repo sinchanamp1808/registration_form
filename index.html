@@ -10,7 +10,7 @@
             margin: 0;
             height: 100vh;
 
-            /* Perfect centering */
+            /* Center the form */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -18,7 +18,7 @@
 
         .container {
             background: white;
-            width: 380px;
+            width: 400px;
             padding: 25px;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
@@ -63,9 +63,18 @@
         #success {
             display: none;
             text-align: center;
-            font-size: 26px;
+            font-size: 20px;
             color: white;
             font-weight: bold;
+        }
+
+        #detailsBox {
+            margin-top: 15px;
+            background: rgba(255,255,255,0.25);
+            padding: 15px;
+            border-radius: 10px;
+            color: #000;
+            font-size: 18px;
         }
     </style>
 </head>
@@ -75,22 +84,25 @@
 <div class="container" id="formDiv">
     <h2>Registration Form</h2>
 
-    <form onsubmit="showSuccess(event)">
+    <form id="regForm" onsubmit="showSuccess(event)">
 
         <label>Name</label>
-        <input type="text" required>
+        <input type="text" id="name" required>
+
+        <label>Email ID</label>
+        <input type="email" id="email" required>
 
         <label>Phone Number</label>
-        <input type="text" required>
+        <input type="text" id="phone" required>
 
         <label>Address</label>
-        <input type="text" required>
+        <input type="text" id="address" required>
 
         <label>Age</label>
-        <input type="number" required>
+        <input type="number" id="age" required>
 
         <label>Gender</label>
-        <select required>
+        <select id="gender" required>
             <option value="">Select</option>
             <option>Male</option>
             <option>Female</option>
@@ -104,13 +116,33 @@
 
 <div id="success">
     🎉 Registration Successful! 🎉
+    <div id="detailsBox"></div>
 </div>
 
 <script>
     function showSuccess(event) {
-        event.preventDefault(); 
+        event.preventDefault(); // prevent page reload
+
+        // Fetch entered values
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let phone = document.getElementById("phone").value;
+        let address = document.getElementById("address").value;
+        let age = document.getElementById("age").value;
+        let gender = document.getElementById("gender").value;
+
+        // Display success page
         document.getElementById("formDiv").style.display = "none";
         document.getElementById("success").style.display = "block";
+
+        // Show details
+        document.getElementById("detailsBox").innerHTML =
+            "<p><b>Name:</b> " + name + "</p>" +
+            "<p><b>Email:</b> " + email + "</p>" +
+            "<p><b>Phone:</b> " + phone + "</p>" +
+            "<p><b>Address:</b> " + address + "</p>" +
+            "<p><b>Age:</b> " + age + "</p>" +
+            "<p><b>Gender:</b> " + gender + "</p>";
     }
 </script>
 
