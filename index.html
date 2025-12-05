@@ -2,56 +2,113 @@
 <html>
 <head>
     <title>Registration Form</title>
+
     <style>
         body {
-            font-family: Arial;
-            margin: 40px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #6a5acd, #00bfff);
+            margin: 0;
+            height: 100vh;
+
+            /* Perfect centering */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
+
+        .container {
+            background: white;
+            width: 380px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        label {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #6a5acd;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #5548c8;
+        }
+
         #success {
             display: none;
-            font-size: 22px;
-            color: green;
+            text-align: center;
+            font-size: 26px;
+            color: white;
             font-weight: bold;
         }
     </style>
 </head>
+
 <body>
 
-<h2>Registration Form</h2>
+<div class="container" id="formDiv">
+    <h2>Registration Form</h2>
 
-<div id="formDiv">
-    <form id="regForm" onsubmit="showSuccess(event)">
-        <label>Name:</label>
-        <input type="text" required><br><br>
+    <form onsubmit="showSuccess(event)">
 
-        <label>Phone No:</label>
-        <input type="text" required><br><br>
+        <label>Name</label>
+        <input type="text" required>
 
-        <label>Address:</label>
-        <input type="text" required><br><br>
+        <label>Phone Number</label>
+        <input type="text" required>
 
-        <label>Age:</label>
-        <input type="number" required><br><br>
+        <label>Address</label>
+        <input type="text" required>
 
-        <label>Gender:</label>
+        <label>Age</label>
+        <input type="number" required>
+
+        <label>Gender</label>
         <select required>
             <option value="">Select</option>
             <option>Male</option>
             <option>Female</option>
             <option>Other</option>
-        </select><br><br>
+        </select>
 
         <button type="submit">Submit</button>
+
     </form>
 </div>
 
 <div id="success">
-    Registration Successful!
+    🎉 Registration Successful! 🎉
 </div>
 
 <script>
     function showSuccess(event) {
-        event.preventDefault(); // stops page reload
+        event.preventDefault(); 
         document.getElementById("formDiv").style.display = "none";
         document.getElementById("success").style.display = "block";
     }
